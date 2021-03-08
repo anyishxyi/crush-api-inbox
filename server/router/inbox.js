@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', getAllConversations.getAllConversations);
 router.post('/', newConversation.newConversation);
-router.post('/:match_id', getConversation.getConversation);
-router.get('/:match_id', newMessage.newMessage);
+router.get('/:match_id', getConversation.getConversation);
+router.post('/:match_id', newMessage.newMessage);
 
 module.exports = router;

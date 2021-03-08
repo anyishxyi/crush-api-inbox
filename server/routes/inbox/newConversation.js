@@ -1,4 +1,4 @@
-import Match from '../../models/match';
+import Inbox from '../../models/inbox';
 
 /**
   * Get add a new match

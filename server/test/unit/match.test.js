@@ -39,7 +39,7 @@ describe('Message Model Unit Test', () => {
 
 afterAll( async () => {
 	try {
-		await MessageModel.findOneAndDelete({_id: savedMessage._id});
+		// await MessageModel.findOneAndDelete({_id: savedMessage._id});
 		await mongoose.disconnect()
 		// console.log('\nSuccessully disconnected to MongoDB Atlas !\n')
 	} catch (error) {

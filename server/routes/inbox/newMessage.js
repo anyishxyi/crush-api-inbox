@@ -1,19 +1,24 @@
-import Match from '../../models/match';
+import Message from '../../models/Message';
 
 /**
-  * Get add a new match
+  * Add a new message
  */
 exports.newMessage = async (req, res, next) => {
-	try {
-		if(!req.body.first_user_id || !req.body.second_user_id) return res.status(422).json({ msg: 'Missing required argument' });
-
-		const match = new Match({ first_user_id: req.body.first_user_id, second_user_id: req.body.second_user_id, created_date: new Date() });
-		const savedMatch = await match.save();
-
-		if(!savedMatch) res.status(500).json({ error: error });
-
-		res.status(201).json({ match: savedMatch });
-	} catch (error) {
-		res.status(500).json({ msg: error });
+  const pass = req.body.password ? req.body.password : '';
+	if(!req.body.from || !req.body.to || !req.body.match_id || !req.body.content ) res.status(304).json({ error: 'misseg required fields' });
+	const messageData = { 
+		from: req.body.from,
+		to: req.body.to,
+		match_id: req.body.match_id,
+		sent_date: new Date(),
+		created_date: new Date(),
+		content: req.body.content
 	}
+
+  const message = new Message(messageData);
+  const savedMessage = await message.save();
+
+  if(!savedMessage) res.status(500).json({ error: error });
+
+  res.status(201).json({ messageSaved: savedMessage });
 }
