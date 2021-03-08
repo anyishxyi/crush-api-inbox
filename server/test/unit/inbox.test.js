@@ -18,7 +18,7 @@ beforeAll(() => {
 					.catch((error) => console.error('\nUnable to connect to MongoDB Atlas\n', error));
 });
 describe('Message Model Unit Test', () => {
-	it('create & save a match successfully', async () => {
+	it('Add a new message in the conversation', async () => {
 		const match = new MessageModel(messageData);
 		savedMessage = await match.save();
 
@@ -27,14 +27,13 @@ describe('Message Model Unit Test', () => {
 		expect(savedMessage.to).toBe(messageData.to);
 		expect(savedMessage.match_id).toBe(messageData.match_id);
 	});
-	// it('get all matches', async () => {
-	// 	const matches = await MessageModel.find();
-	// 	expect(matches.length).toBeDefined();	
-	// });
-	// it('List All match of one user', async () => {
-	// 	const matches = await MessageModel.find({first_user_id: messageData.first_user_id, second_user_id: messageData.first_user_id});
-	// 	expect(matches.length).toBeDefined();	
-	// });
+	it('Get a particular conversation from the inbox', async () => {
+		const message = await MessageModel.findOne({_id: savedMessage._id}).catch((error) => { res.status(500).json({ error: error }); });
+
+		expect(message.from).toBe(messageData.from);
+		expect(message.to).toBe(messageData.to);
+		expect(message.match_id).toBe(messageData.match_id);
+	});
 })
 
 afterAll( async () => {
