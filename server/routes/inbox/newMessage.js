@@ -20,5 +20,5 @@ exports.newMessage = async (req, res, next) => {
 
   if(!savedMessage) res.status(500).json({ error: error });
 
-  res.status(201).json({ messageSaved: savedMessage });
+  res.status(201).json({ message: savedMessage });
 }

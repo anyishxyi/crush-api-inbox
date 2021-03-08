@@ -15,7 +15,7 @@ exports.getConversation = async (req, res, next) => {
         error: new Error('User not found!')
       });
     }
-    res.status(200).json({ 'message': conv });
+    res.status(200).json({ message: conv });
   } catch (error) {
     res.status(500).json({ msg: error });
   }

@@ -1,6 +1,6 @@
 {
   "name": "crush-api-inbox",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "server.js",
   "description": "crush's inbox api",
   "scripts": {
@@ -12,7 +12,7 @@
     "dev": "NODE_ENV=development npm-run-all build server",
     "prod": "NODE_ENV=production npm-run-all build server",
     "watch:dev": "nodemon",
-    "test": "jest --runInBand --detectOpenHandles --testPathPattern=server/test/unit"
+    "test": "jest --runInBand --detectOpenHandles --testPathPattern=server/test"
   },
   "babel": {
     "presets": [

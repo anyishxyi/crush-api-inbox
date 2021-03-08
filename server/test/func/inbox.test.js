@@ -12,7 +12,7 @@ const messageData = {
   created_date: new Date(),
   content: "Hello !"
 };
-var savedMessage = null;
+let savedMessage = null;
 
 describe("testing-message-routes", () => {
   // it("GET /match get all matchs", async done => {
@@ -22,10 +22,10 @@ describe("testing-message-routes", () => {
 	// 	expect(matchs.length).toBeDefined()
 	// 	done()
   // });
-  it("POST /match create a new match", async done => {
+  it("POST /match Add a new message in the conversation", async done => {
     const response = await request.post(`/inbox/${messageData.match_id}`)
 																	.send(messageData);
-		savedMessage = response.body ? response.body.messageSaved : null
+		savedMessage = response.body ? response.body.message : null
 		expect(response.status).toBe(201)
 		expect(savedMessage._id).toBeDefined();
 		expect(savedMessage.from).toBe(messageData.from);
@@ -33,13 +33,16 @@ describe("testing-message-routes", () => {
 		expect(savedMessage.match_id).toBe(messageData.match_id);
 		done()
   });
-	// it('GET /match/:userID List All match of one user', async done => {
-	// 	const response = await request.get(`/match/${messageData.first_user_id}`)
-	// 	const matchs = response.body ? response.body.matchs : null
-	// 	expect(response.status).toBe(200)
-	// 	expect(matchs.length).toBeDefined()
-	// 	done()
-	// });
+	it('GET Get a particular conversation from the inbox', async done => {
+		const response = await request.get(`/inbox/${savedMessage._id}`)
+		const message = response.body ? response.body.message : null
+		expect(response.status).toBe(200)
+		expect(message._id).toBeDefined();
+		expect(message.from).toBe(messageData.from);
+		expect(message.to).toBe(messageData.to);
+		expect(message.match_id).toBe(messageData.match_id);
+		done()
+	});
 });
 
 afterAll( async () => {
