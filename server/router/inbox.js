@@ -1,13 +1,14 @@
 import express from 'express';
-import addMatch from '../routes/match/addMatch';
-import getAll from '../routes/match/getAll';
-import getUserMatch from '../routes/match/getUserMatch';
+import getAllConversations from '../routes/inbox/getAllConversations';
+import newConversation from '../routes/inbox/newConversation';
+import getConversation from '../routes/inbox/getConversation';
+import newMessage from '../routes/inbox/newMessage';
 
 const router = express.Router();
 
-router.post('/', addMatch.addMatch);
-router.get('/', getAll.getAll);
-router.post('/:inboxID', getUserMatch.getUserMatch);
-router.get('/:inboxID', getUserMatch.getUserMatch);
+router.get('/', getAllConversations.getAllConversations);
+router.post('/', newConversation.newConversation);
+router.post('/:match_id', getConversation.getConversation);
+router.get('/:match_id', newMessage.newMessage);
 
 module.exports = router;
