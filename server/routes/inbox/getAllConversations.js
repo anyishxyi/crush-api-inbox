@@ -1,15 +1,15 @@
-import Match from '../../models/match';
+import Inbox from '../../models/inbox';
 
 /**
-  * Get all matchs
+  * Get all Inboxs
  */
 exports.getAllConversations = async (req, res, next) => {
   try {
-    const matchs = await Match.find().catch((error) => { res.status(500).json({ error: error }); });
-    if (!matchs) {
-      return res.status(404).json({ error: new Error('matchs not found!') });
+    const inboxs = await Inbox.find().catch((error) => { res.status(500).json({ error: error }); });
+    if (!inboxs) {
+      return res.status(404).json({ error: new Error('inboxs not found!') });
     }
-    res.status(200).json({matchs: matchs});
+    res.status(200).json({inboxs: inboxs});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
